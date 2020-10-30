@@ -15,19 +15,19 @@ import java.sql.Statement;
 public class GetProductsServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db")) {
                 Statement stmt = c.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCT");
-                response.getWriter().println("<html><body>");
+                response.getWriter().print("<html><body>\n");
 
                 while (rs.next()) {
                     String name = rs.getString("name");
                     int price = rs.getInt("price");
-                    response.getWriter().println(name + "\t" + price + "</br>");
+                    response.getWriter().print(name + "\t" + price + "</br>\n");
                 }
-                response.getWriter().println("</body></html>");
+                response.getWriter().print("</body></html>");
 
                 rs.close();
                 stmt.close();
