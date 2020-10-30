@@ -6,13 +6,11 @@ import org.junit.jupiter.api.Test;
 import ru.akirakozov.sd.refactoring.servlet.QueryServlet;
 
 import java.io.IOException;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 class QueryServletTest {
