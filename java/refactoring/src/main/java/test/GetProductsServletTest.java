@@ -25,23 +25,6 @@ class GetProductsServletTest {
         TestUtils.dropTable();
     }
 
-    private void formInsert(Map<String, Integer> items) throws SQLException {
-        StringBuilder request = new StringBuilder();
-        if (!items.isEmpty()) {
-            request.append("insert into product(name, price) values\n");
-            for (int i = 0; i < items.size(); ++i) {
-                var name = items.keySet().toArray()[i];
-                var price = items.values().toArray()[i];
-                request.append("('").append(name).append("', '").append(price).append("')");
-                if (i < items.size() - 1) {
-                    request.append(",\n");
-                }
-            }
-        }
-        System.out.print(request.toString());
-        TestUtils.sqlRequest(request.toString());
-    }
-
     private String formAnswer(Map<String, Integer> items) {
         StringBuilder answer = new StringBuilder();
         answer.append("<html><body>\n");
@@ -66,7 +49,7 @@ class GetProductsServletTest {
         items.put("iPhone", 1000);
         items.put("iPad", 1500);
         items.put("iMac", 500);
-        formInsert(items);
+        TestUtils.formInsert(items);
         getProductsServlet.doGet(TestUtils.request, TestUtils.response);
 
         assertEquals(formAnswer(items), TestUtils.writer.toString());

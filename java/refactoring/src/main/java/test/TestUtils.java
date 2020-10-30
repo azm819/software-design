@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Map;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -47,5 +48,21 @@ public class TestUtils {
 
     public static void dropTable() throws SQLException {
         sqlRequest(DROP_TABLE);
+    }
+
+    public static void formInsert(Map<String, Integer> items) throws SQLException {
+        StringBuilder request = new StringBuilder();
+        if (!items.isEmpty()) {
+            request.append("insert into product(" + NAME + ", " + PRICE + ") values\n");
+            for (int i = 0; i < items.size(); ++i) {
+                var name = items.keySet().toArray()[i];
+                var price = items.values().toArray()[i];
+                request.append("('").append(name).append("', '").append(price).append("')");
+                if (i < items.size() - 1) {
+                    request.append(",\n");
+                }
+            }
+        }
+        sqlRequest(request.toString());
     }
 }

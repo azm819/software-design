@@ -24,7 +24,7 @@ public class GetProductsServlet extends HttpServlet {
 
                 while (rs.next()) {
                     String name = rs.getString("name");
-                    int price = rs.getInt("price");
+                    long price = rs.getLong("price");
                     response.getWriter().print(name + "\t" + price + "</br>\n");
                 }
                 response.getWriter().print("</body></html>");
