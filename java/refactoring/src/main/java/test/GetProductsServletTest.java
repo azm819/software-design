@@ -47,8 +47,8 @@ class GetProductsServletTest {
     public void testAddOne() throws SQLException, IOException {
         Map<String, Integer> items = new LinkedHashMap<>();
         items.put("iPhone", 1000);
-        items.put("iPad", 1500);
         items.put("iMac", 500);
+        items.put("iPad", 1500);
         TestUtils.formInsert(items);
         getProductsServlet.doGet(TestUtils.request, TestUtils.response);
 
